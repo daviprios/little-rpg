@@ -12,7 +12,8 @@ export default function App() {
 				{isNameSet ? (
 					<Game username={username} />
 				) : (
-					<div className='flex flex-col gap-2'>
+					<div className='flex flex-col gap-2 items-center'>
+						<p>Little RPG</p>
 						<input
 							className='text-slate-950 py-1 px-2 rounded-md min-w-40'
 							placeholder='Digite seu nome'
@@ -28,7 +29,7 @@ export default function App() {
 							}}
 						/>
 						<button
-							className='p-2 bg-slate-600 rounded-md hover:bg-slate-500'
+							className='py-2 px-4 bg-slate-600 rounded-md hover:bg-slate-500'
 							onClick={() => {
 								if (!username) setUsername('Um otário sem nome')
 								setIsNameSet(true)
