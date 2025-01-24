@@ -9,7 +9,7 @@ export default function MainMenu() {
 		<div className='flex flex-col gap-2 items-center'>
 			<p>Little RPG</p>
 			<input
-				className='text-slate-950 py-1 px-2 rounded-md min-w-40'
+				className='text-slate-950 py-1 px-2 rounded-md min-w-40 bg-slate-100'
 				placeholder='Digite seu nome'
 				id='username'
 				value={username}
@@ -23,7 +23,7 @@ export default function MainMenu() {
 				}}
 			/>
 			<button
-				className='py-2 px-4 bg-slate-600 rounded-md hover:bg-slate-500'
+				className='py-2 px-4 bg-slate-600 rounded-md hover:bg-slate-500 cursor-pointer'
 				onClick={() => {
 					if (!username) setUsername('Um otário sem nome')
 					setIsNameSet(true)

@@ -4,7 +4,7 @@ export function HealthBar({ health, maxHealth }: Character) {
 	return (
 		<div className='bg-red-300 relative'>
 			<div
-				className={`bg-green-600 text-transparent select-none rounded-sm flex justify-center items-center transition-[width] duration-300`}
+				className={`bg-green-600 text-transparent select-none rounded-xs flex justify-center items-center transition-[width] duration-300`}
 				style={{
 					width: `${(health * 100) / maxHealth}%`
 				}}
