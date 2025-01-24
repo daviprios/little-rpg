@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Character } from '../types/Character'
 
 export function useGame({ playerUsername }: { playerUsername: string }) {
@@ -34,7 +34,7 @@ export function useGame({ playerUsername }: { playerUsername: string }) {
 		critFactor: 10000
 	})
 
-	const [logs, setLogs] = useState<string[]>([])
+	const [logs, setLogs] = useState<React.ReactNode[]>([])
 
 	const [isGameEnd, setIsGameEnd] = useState(false)
 	const [isPlayerTurn, setIsPlayerTurn] = useState(true)
@@ -75,9 +75,10 @@ export function useGame({ playerUsername }: { playerUsername: string }) {
 
 			setLogs((prev) => [
 				...prev,
-				`O jogador ${
-					hasPlayerCrited ? 'critou' : 'causou'
-				} ${totalDamage} de dano`
+				<>
+					🧙 {hasPlayerCrited ? 'critou💥' : 'causou'}{' '}
+					<span className='text-red-400'>{totalDamage}</span> de dano⚔️
+				</>
 			])
 		} else if (type === 'HEAL') {
 			const heal = Math.trunc(
@@ -97,7 +98,10 @@ export function useGame({ playerUsername }: { playerUsername: string }) {
 
 			setLogs((prev) => [
 				...prev,
-				`O jogador ${hasPlayerCrited ? 'critou' : 'curou'} ${totalHeal} de vida`
+				<>
+					🧙 {hasPlayerCrited ? 'critou💥' : 'curou'}{' '}
+					<span className='text-green-400'>{totalHeal}</span> de vida💚
+				</>
 			])
 		} else if (type === 'FIREBALL') {
 			const fireballDamage = Math.trunc(
@@ -128,13 +132,15 @@ export function useGame({ playerUsername }: { playerUsername: string }) {
 
 			setLogs((prev) => [
 				...prev,
-				`O jogador ${
-					hasPlayerCrited ? 'critou' : 'causou'
-				} ${totalFireballDamage} de bola de fogo`
+				<>
+					🧙 {hasPlayerCrited ? 'critou💥' : 'causou'}{' '}
+					<span className='text-orange-400'>{totalFireballDamage}</span> de bola
+					de fogo🔥
+				</>
 			])
 		} else if (type === 'SURRENDER') {
 			setHasPlayerTriedToSurrender(true)
-			setLogs((prev) => [...prev, `Proibido covardes`])
+			setLogs((prev) => [...prev, `❌ Proibido covardes ❌`])
 		}
 	}
 
@@ -166,9 +172,10 @@ export function useGame({ playerUsername }: { playerUsername: string }) {
 
 			setLogs((prev) => [
 				...prev,
-				`O dragão ${
-					hasDragonCrited ? 'critou' : 'causou'
-				} ${totalDamage} de dano`
+				<>
+					🐉 {hasDragonCrited ? 'critou💥' : 'causou'}{' '}
+					<span className='text-red-400'>{totalDamage}</span> de dano🐾
+				</>
 			])
 		} else if (type === 'HEAL') {
 			const heal = Math.trunc(
@@ -186,7 +193,10 @@ export function useGame({ playerUsername }: { playerUsername: string }) {
 
 			setLogs((prev) => [
 				...prev,
-				`O dragão ${hasDragonCrited ? 'critou' : 'curou'} ${totalHeal} de vida`
+				<>
+					🐉 {hasDragonCrited ? 'critou💥' : 'curou'}{' '}
+					<span className='text-green-400'>{totalHeal}</span> de vida💚
+				</>
 			])
 		} else if (type === 'FIREBALL') {
 			const fireballDamage = Math.trunc(
@@ -211,14 +221,16 @@ export function useGame({ playerUsername }: { playerUsername: string }) {
 
 			setLogs((prev) => [
 				...prev,
-				`O dragão ${
-					hasDragonCrited ? 'critou' : 'causou'
-				} ${totalFireballDamage} de bola de fogo`
+				<>
+					🐉 {hasDragonCrited ? 'critou💥' : 'curou'}{' '}
+					<span className='text-orange-400'>{totalFireballDamage}</span> de bola
+					de fogo🔥
+				</>
 			])
 		} else if (type === 'FUCK_YOU') {
 			setLogs((prev) => [
 				...prev,
-				`FUCK YOU: O dragão decidiu que você deveria morrer`
+				`🖕🖕🖕 🐉 decidiu que você deveria 💀 🖕🖕🖕`
 			])
 		}
 	}
@@ -226,10 +238,10 @@ export function useGame({ playerUsername }: { playerUsername: string }) {
 	function checkEndGame() {
 		if (player.health === 0) {
 			setIsGameEnd(true)
-			setLogs((prev) => [...prev, 'O jogador perdeu'])
+			setLogs((prev) => [...prev, '💀💀💀🧙💀💀💀'])
 		} else if (dragon.health === 0) {
 			setIsGameEnd(true)
-			setLogs((prev) => [...prev, 'O jogador venceu!'])
+			setLogs((prev) => [...prev, '🧙 venceu!'])
 		}
 	}
 

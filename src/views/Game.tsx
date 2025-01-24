@@ -22,7 +22,7 @@ export default function Game() {
 	})
 
 	return (
-		<div className='border-2 border-slate-600 rounded-md w-96 h-96 p-2 flex flex-col justify-between gap-2'>
+		<div className='border-2 border-slate-600 rounded-md w-[30rem] h-96 p-2 flex flex-col justify-between gap-2'>
 			<div>
 				<HealthBar {...player} />
 				<CharacterName name={player.name} />
@@ -36,25 +36,25 @@ export default function Game() {
 						})
 					}
 				>
-					Atacar
+					Atacar ⚔️
 				</ActionButton>
 				<ActionButton
 					disabled={!isPlayerTurn || isGameEnd || player.fireballCount === 0}
 					action={() => playerActions({ type: 'FIREBALL' })}
 				>
-					Bola de fogo ({player.fireballCount})
+					Bola de fogo ({player.fireballCount}) 🔥
 				</ActionButton>
 				<ActionButton
 					disabled={!isPlayerTurn || isGameEnd || player.healCount === 0}
 					action={() => playerActions({ type: 'HEAL' })}
 				>
-					Curar ({player.healCount})
+					Curar ({player.healCount}) 🩹
 				</ActionButton>
 				<ActionButton
 					disabled={!isPlayerTurn || isGameEnd || hasPlayerTriedToSurrender}
 					action={() => playerActions({ type: 'SURRENDER' })}
 				>
-					Render-se
+					Render-se 🏳️
 				</ActionButton>
 			</div>
 			<div
