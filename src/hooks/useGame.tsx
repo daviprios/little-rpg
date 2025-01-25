@@ -2,6 +2,17 @@ import { useState, useRef, useEffect } from 'react'
 import { Character } from '../types/Character'
 import { PlayerGender, SkinColor } from '../context/SettingsContext'
 import { getCharacterEmoji } from '../util/getCharacterEmoji'
+import {
+	DRAGON_EMOJI,
+	EXPLOSION_EMOJI,
+	FIRE_EMOJI,
+	GREEN_HEART_EMOJI,
+	MIDDLE_FINGER_EMOJI,
+	PAW_EMOJI,
+	RED_X_EMOJI,
+	SKULL_EMOJI,
+	SWORD_EMOJI
+} from '../constants/emoji'
 
 export function useGame({
 	playerUsername,
@@ -90,8 +101,9 @@ export function useGame({
 						playerGender,
 						skinColor
 					})}{' '}
-					{hasPlayerCrited ? 'critou💥' : 'causou'}{' '}
-					<span className='text-red-400'>{totalDamage}</span> de dano⚔️
+					{hasPlayerCrited ? `critou${EXPLOSION_EMOJI}` : 'causou'}{' '}
+					<span className='text-red-400'>{totalDamage}</span> de dano
+					{SWORD_EMOJI}
 				</>
 			])
 		} else if (type === 'HEAL') {
@@ -117,8 +129,9 @@ export function useGame({
 						playerGender,
 						skinColor
 					})}{' '}
-					{hasPlayerCrited ? 'critou💥' : 'curou'}{' '}
-					<span className='text-green-400'>{totalHeal}</span> de vida💚
+					{hasPlayerCrited ? `critou${EXPLOSION_EMOJI}` : 'curou'}{' '}
+					<span className='text-green-400'>{totalHeal}</span> de vida
+					{GREEN_HEART_EMOJI}
 				</>
 			])
 		} else if (type === 'FIREBALL') {
@@ -155,14 +168,17 @@ export function useGame({
 						playerGender,
 						skinColor
 					})}{' '}
-					{hasPlayerCrited ? 'critou💥' : 'causou'}{' '}
+					{hasPlayerCrited ? `critou${EXPLOSION_EMOJI}` : 'causou'}{' '}
 					<span className='text-orange-400'>{totalFireballDamage}</span> de bola
-					de fogo🔥
+					de fogo{FIRE_EMOJI}
 				</>
 			])
 		} else if (type === 'SURRENDER') {
 			setHasPlayerTriedToSurrender(true)
-			setLogs((prev) => [...prev, `❌ Proibido covardes ❌`])
+			setLogs((prev) => [
+				...prev,
+				`${RED_X_EMOJI} Proibido covardes ${RED_X_EMOJI}`
+			])
 		}
 	}
 
@@ -195,8 +211,9 @@ export function useGame({
 			setLogs((prev) => [
 				...prev,
 				<>
-					🐉 {hasDragonCrited ? 'critou💥' : 'causou'}{' '}
-					<span className='text-red-400'>{totalDamage}</span> de dano🐾
+					{DRAGON_EMOJI}{' '}
+					{hasDragonCrited ? `critou${EXPLOSION_EMOJI}` : 'causou'}{' '}
+					<span className='text-red-400'>{totalDamage}</span> de dano{PAW_EMOJI}
 				</>
 			])
 		} else if (type === 'HEAL') {
@@ -216,8 +233,10 @@ export function useGame({
 			setLogs((prev) => [
 				...prev,
 				<>
-					🐉 {hasDragonCrited ? 'critou💥' : 'curou'}{' '}
-					<span className='text-green-400'>{totalHeal}</span> de vida💚
+					{DRAGON_EMOJI}{' '}
+					{hasDragonCrited ? `critou${EXPLOSION_EMOJI}` : 'curou'}{' '}
+					<span className='text-green-400'>{totalHeal}</span> de vida
+					{GREEN_HEART_EMOJI}
 				</>
 			])
 		} else if (type === 'FIREBALL') {
@@ -244,15 +263,16 @@ export function useGame({
 			setLogs((prev) => [
 				...prev,
 				<>
-					🐉 {hasDragonCrited ? 'critou💥' : 'curou'}{' '}
+					{DRAGON_EMOJI}{' '}
+					{hasDragonCrited ? `critou${EXPLOSION_EMOJI}` : 'causou'}{' '}
 					<span className='text-orange-400'>{totalFireballDamage}</span> de bola
-					de fogo🔥
+					de fogo{FIRE_EMOJI}
 				</>
 			])
 		} else if (type === 'FUCK_YOU') {
 			setLogs((prev) => [
 				...prev,
-				`🖕🖕🖕 🐉 decidiu que você deveria 💀 🖕🖕🖕`
+				`${MIDDLE_FINGER_EMOJI}${MIDDLE_FINGER_EMOJI}${MIDDLE_FINGER_EMOJI} ${DRAGON_EMOJI} decidiu que você deveria ${SKULL_EMOJI} ${MIDDLE_FINGER_EMOJI}${MIDDLE_FINGER_EMOJI}${MIDDLE_FINGER_EMOJI}`
 			])
 		}
 	}
@@ -262,10 +282,10 @@ export function useGame({
 			setIsGameEnd(true)
 			setLogs((prev) => [
 				...prev,
-				`💀💀💀${getCharacterEmoji({
+				`${SKULL_EMOJI}${SKULL_EMOJI}${SKULL_EMOJI}${getCharacterEmoji({
 					playerGender,
 					skinColor
-				})}💀💀💀`
+				})}${SKULL_EMOJI}${SKULL_EMOJI}${SKULL_EMOJI}`
 			])
 		} else if (dragon.health === 0) {
 			setIsGameEnd(true)

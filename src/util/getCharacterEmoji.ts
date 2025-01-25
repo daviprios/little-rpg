@@ -2,7 +2,7 @@ import {
 	GENDER_MAN_STRING,
 	GENDER_WOMAN_STRING
 } from '../constants/genderString'
-import { MAGE_PERSON_EMOJI } from '../constants/personEmoji'
+import { MAGE_PERSON_EMOJI } from '../constants/emoji'
 import {
 	SKIN_TONE_MODIFIER_EMOJI_DARK,
 	SKIN_TONE_MODIFIER_EMOJI_LIGHT,
