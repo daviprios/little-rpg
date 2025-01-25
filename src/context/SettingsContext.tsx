@@ -5,8 +5,6 @@ export type PlayerGender = 'MAN' | 'WOMAN' | 'OTHER_OR_NONE'
 type VoiceTone = 'HIGH' | 'LOW'
 
 const settingsContext = createContext<{
-	isNameSet: boolean
-	setIsNameSet: React.Dispatch<React.SetStateAction<boolean>>
 	username: string
 	setUsername: React.Dispatch<React.SetStateAction<string>>
 	skinColor: SkinColor
@@ -16,8 +14,6 @@ const settingsContext = createContext<{
 	voiceTone: VoiceTone
 	setVoiceTone: React.Dispatch<React.SetStateAction<VoiceTone>>
 }>({
-	isNameSet: false,
-	setIsNameSet: () => {},
 	username: '',
 	setUsername: () => {},
 	skinColor: '3',
@@ -32,7 +28,6 @@ const settingsContext = createContext<{
 export const useSettingsContext = () => useContext(settingsContext)
 
 export function SettingsProvider({ children }: { children: React.ReactNode }) {
-	const [isNameSet, setIsNameSet] = useState(false)
 	const [username, setUsername] = useState('')
 	const [skinColor, setSkinColor] = useState<SkinColor>('3')
 	const [playerGender, setPlayerGender] =
@@ -42,8 +37,6 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
 	return (
 		<settingsContext.Provider
 			value={{
-				isNameSet,
-				setIsNameSet,
 				username,
 				setUsername,
 				skinColor,
