@@ -4,9 +4,10 @@ import { HealthBar } from '../components/HealthBar'
 import { ActionButton } from '../components/ActionButton'
 import { useGame } from '../hooks/useGame'
 import { useSettingsContext } from '../context/SettingsContext'
+import { getCharacterEmoji } from '../util/getCharacterEmoji'
 
 export default function Game() {
-	const { username } = useSettingsContext()
+	const { username, playerGender, skinColor } = useSettingsContext()
 
 	const {
 		player,
@@ -18,14 +19,21 @@ export default function Game() {
 		logsBoxRef,
 		playerActions
 	} = useGame({
-		playerUsername: username
+		playerUsername: username,
+		playerGender,
+		skinColor
 	})
 
 	return (
 		<div className='border-2 border-slate-600 rounded-md w-[30rem] h-96 p-2 flex flex-col justify-between gap-2'>
 			<div>
 				<HealthBar {...player} />
-				<CharacterName name={player.name} />
+				<CharacterName
+					name={`${getCharacterEmoji({
+						playerGender,
+						skinColor
+					})} ${player.name}`}
+				/>
 			</div>
 			<div className='grid grid-cols-2 grid-rows-2 gap-2'>
 				<ActionButton

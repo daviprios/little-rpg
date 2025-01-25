@@ -1,7 +1,17 @@
 import { useState, useRef, useEffect } from 'react'
 import { Character } from '../types/Character'
+import { PlayerGender, SkinColor } from '../context/SettingsContext'
+import { getCharacterEmoji } from '../util/getCharacterEmoji'
 
-export function useGame({ playerUsername }: { playerUsername: string }) {
+export function useGame({
+	playerUsername,
+	playerGender,
+	skinColor
+}: {
+	playerUsername: string
+	playerGender: PlayerGender
+	skinColor: SkinColor
+}) {
 	const [player, setPlayer] = useState<Character>({
 		health: 50,
 		maxHealth: 50,
@@ -76,7 +86,11 @@ export function useGame({ playerUsername }: { playerUsername: string }) {
 			setLogs((prev) => [
 				...prev,
 				<>
-					🧙 {hasPlayerCrited ? 'critou💥' : 'causou'}{' '}
+					{getCharacterEmoji({
+						playerGender,
+						skinColor
+					})}{' '}
+					{hasPlayerCrited ? 'critou💥' : 'causou'}{' '}
 					<span className='text-red-400'>{totalDamage}</span> de dano⚔️
 				</>
 			])
@@ -99,7 +113,11 @@ export function useGame({ playerUsername }: { playerUsername: string }) {
 			setLogs((prev) => [
 				...prev,
 				<>
-					🧙 {hasPlayerCrited ? 'critou💥' : 'curou'}{' '}
+					{getCharacterEmoji({
+						playerGender,
+						skinColor
+					})}{' '}
+					{hasPlayerCrited ? 'critou💥' : 'curou'}{' '}
 					<span className='text-green-400'>{totalHeal}</span> de vida💚
 				</>
 			])
@@ -133,7 +151,11 @@ export function useGame({ playerUsername }: { playerUsername: string }) {
 			setLogs((prev) => [
 				...prev,
 				<>
-					🧙 {hasPlayerCrited ? 'critou💥' : 'causou'}{' '}
+					{getCharacterEmoji({
+						playerGender,
+						skinColor
+					})}{' '}
+					{hasPlayerCrited ? 'critou💥' : 'causou'}{' '}
 					<span className='text-orange-400'>{totalFireballDamage}</span> de bola
 					de fogo🔥
 				</>
@@ -238,10 +260,22 @@ export function useGame({ playerUsername }: { playerUsername: string }) {
 	function checkEndGame() {
 		if (player.health === 0) {
 			setIsGameEnd(true)
-			setLogs((prev) => [...prev, '💀💀💀🧙💀💀💀'])
+			setLogs((prev) => [
+				...prev,
+				`💀💀💀${getCharacterEmoji({
+					playerGender,
+					skinColor
+				})}💀💀💀`
+			])
 		} else if (dragon.health === 0) {
 			setIsGameEnd(true)
-			setLogs((prev) => [...prev, '🧙 venceu!'])
+			setLogs((prev) => [
+				...prev,
+				`${getCharacterEmoji({
+					playerGender,
+					skinColor
+				})} venceu!`
+			])
 		}
 	}
 
