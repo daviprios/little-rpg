@@ -9,13 +9,13 @@ export default function Leaderboard() {
 				<table>
 					<thead>
 						<tr>
-							<th className='text-left'>Emoji</th>
-							<th className='text-left'>Nome</th>
-							<th className='text-left'>Vida</th>
+							<th className='text-left min-w-16'>Emoji</th>
+							<th className='text-left min-w-60'>Nome</th>
+							<th className='text-left min-w-16'>Vida</th>
 						</tr>
 					</thead>
 					<tbody>
-						{leaderboard.slice(0, 5).map(({ createdAt, player }) => {
+						{leaderboard.map(({ createdAt, player }) => {
 							return (
 								<tr key={createdAt}>
 									<td>{player.emoji}</td>

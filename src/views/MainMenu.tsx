@@ -161,7 +161,7 @@ export default function MainMenu() {
 					</table>
 					{leaderboard.length > 5 && (
 						<button
-							className='py-2 px-4 bg-slate-600 rounded-md hover:bg-slate-500 cursor-pointer'
+							className='py-2 px-4 bg-slate-600 rounded-md hover:bg-slate-500 cursor-pointer mt-4'
 							onClick={() => setNavigationView('LEADERBOARD')}
 						>
 							Ver tabela completa
