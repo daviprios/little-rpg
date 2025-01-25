@@ -10,6 +10,7 @@ import {
 	GENDER_WOMAN_STRING
 } from '../constants/genderString'
 import { useNavigationContext } from '../context/NavigationContext'
+import { useLeaderboardContext } from '../context/LeaderboardContext'
 
 export default function MainMenu() {
 	const {
@@ -22,6 +23,7 @@ export default function MainMenu() {
 	} = useSettingsContext()
 
 	const { setNavigationView } = useNavigationContext()
+	const { leaderboard } = useLeaderboardContext()
 
 	const [inputWidth, setInputWidth] = useState('')
 
@@ -126,21 +128,45 @@ export default function MainMenu() {
 					Confirmar
 				</button>
 			</section>
-			<section>
+			<section className='flex flex-col gap-2 items-center'>
 				<h2 className='font-bold text-2xl underline'>Tabela de recordes</h2>
-				<div>
+				<div className='flex flex-col'>
 					<table>
-						<colgroup>
-							<col></col>
-							<col></col>
-							<col></col>
-						</colgroup>
-						<tr>
-							<th>Emoji</th>
-							<th>Nome</th>
-							<th>Vida</th>
-						</tr>
+						<thead>
+							<tr>
+								<th className='text-left min-w-16'>Emoji</th>
+								<th className='text-left min-w-60'>Nome</th>
+								<th className='text-left min-w-16'>Vida</th>
+							</tr>
+						</thead>
+						<tbody>
+							{leaderboard.length === 0 ? (
+								<tr>
+									<td>-</td>
+									<td>-</td>
+									<td>-</td>
+								</tr>
+							) : (
+								leaderboard.slice(0, 5).map(({ createdAt, player }) => {
+									return (
+										<tr key={createdAt}>
+											<td>{player.emoji}</td>
+											<td>{player.name}</td>
+											<td>{player.health}</td>
+										</tr>
+									)
+								})
+							)}
+						</tbody>
 					</table>
+					{leaderboard.length > 5 && (
+						<button
+							className='py-2 px-4 bg-slate-600 rounded-md hover:bg-slate-500 cursor-pointer'
+							onClick={() => setNavigationView('LEADERBOARD')}
+						>
+							Ver tabela completa
+						</button>
+					)}
 				</div>
 			</section>
 		</div>

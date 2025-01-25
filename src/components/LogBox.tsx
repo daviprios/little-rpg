@@ -1,4 +1,4 @@
-export function LogBox({ logs }: { logs: React.ReactNode[] }) {
+export function LogBox({ logs }: { logs: string[] }) {
 	return (
 		<div>
 			{logs.map((log, i) => {

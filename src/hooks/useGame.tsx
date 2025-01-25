@@ -13,6 +13,7 @@ import {
 	SKULL_EMOJI,
 	SWORD_EMOJI
 } from '../constants/emoji'
+import { useLeaderboardContext } from '../context/LeaderboardContext'
 
 export function useGame({
 	playerUsername,
@@ -23,6 +24,8 @@ export function useGame({
 	playerGender: PlayerGender
 	skinColor: SkinColor
 }) {
+	const { addScore } = useLeaderboardContext()
+
 	const [player, setPlayer] = useState<Character>({
 		health: 50,
 		maxHealth: 50,
@@ -36,7 +39,11 @@ export function useGame({
 		fireballBaseDamage: 50,
 		fireballRandomDamage: 50,
 		critChance: 50,
-		critFactor: 5
+		critFactor: 5,
+		emoji: getCharacterEmoji({
+			playerGender,
+			skinColor
+		})
 	})
 
 	const [dragon, setDragon] = useState<Character>({
@@ -52,10 +59,12 @@ export function useGame({
 		fireballRandomDamage: 0,
 		fireballCount: 9999,
 		critChance: 300,
-		critFactor: 10000
+		critFactor: 10000,
+		emoji: DRAGON_EMOJI
 	})
 
-	const [logs, setLogs] = useState<React.ReactNode[]>([])
+	const [startTime] = useState(Date.now())
+	const [logs, setLogs] = useState<string[]>([])
 
 	const [isGameEnd, setIsGameEnd] = useState(false)
 	const [isPlayerTurn, setIsPlayerTurn] = useState(true)
@@ -96,15 +105,9 @@ export function useGame({
 
 			setLogs((prev) => [
 				...prev,
-				<>
-					{getCharacterEmoji({
-						playerGender,
-						skinColor
-					})}{' '}
-					{hasPlayerCrited ? `critou${EXPLOSION_EMOJI}` : 'causou'}{' '}
-					<span className='text-red-400'>{totalDamage}</span> de dano
-					{SWORD_EMOJI}
-				</>
+				`${player.emoji} ${
+					hasPlayerCrited ? `critou${EXPLOSION_EMOJI}` : 'causou'
+				} ${totalDamage} de dano${SWORD_EMOJI}`
 			])
 		} else if (type === 'HEAL') {
 			const heal = Math.trunc(
@@ -124,15 +127,9 @@ export function useGame({
 
 			setLogs((prev) => [
 				...prev,
-				<>
-					{getCharacterEmoji({
-						playerGender,
-						skinColor
-					})}{' '}
-					{hasPlayerCrited ? `critou${EXPLOSION_EMOJI}` : 'curou'}{' '}
-					<span className='text-green-400'>{totalHeal}</span> de vida
-					{GREEN_HEART_EMOJI}
-				</>
+				`${player.emoji} ${
+					hasPlayerCrited ? `critou${EXPLOSION_EMOJI}` : 'curou'
+				} ${totalHeal} de vida${GREEN_HEART_EMOJI}`
 			])
 		} else if (type === 'FIREBALL') {
 			const fireballDamage = Math.trunc(
@@ -163,15 +160,9 @@ export function useGame({
 
 			setLogs((prev) => [
 				...prev,
-				<>
-					{getCharacterEmoji({
-						playerGender,
-						skinColor
-					})}{' '}
-					{hasPlayerCrited ? `critou${EXPLOSION_EMOJI}` : 'causou'}{' '}
-					<span className='text-orange-400'>{totalFireballDamage}</span> de bola
-					de fogo{FIRE_EMOJI}
-				</>
+				`${player.emoji} ${
+					hasPlayerCrited ? `critou${EXPLOSION_EMOJI}` : 'causou'
+				} ${totalFireballDamage} de bola de fogo${FIRE_EMOJI}`
 			])
 		} else if (type === 'SURRENDER') {
 			setHasPlayerTriedToSurrender(true)
@@ -210,11 +201,9 @@ export function useGame({
 
 			setLogs((prev) => [
 				...prev,
-				<>
-					{DRAGON_EMOJI}{' '}
-					{hasDragonCrited ? `critou${EXPLOSION_EMOJI}` : 'causou'}{' '}
-					<span className='text-red-400'>{totalDamage}</span> de dano{PAW_EMOJI}
-				</>
+				`${dragon.emoji} ${
+					hasDragonCrited ? `critou${EXPLOSION_EMOJI}` : 'causou'
+				} ${totalDamage} de dano${PAW_EMOJI}`
 			])
 		} else if (type === 'HEAL') {
 			const heal = Math.trunc(
@@ -232,12 +221,9 @@ export function useGame({
 
 			setLogs((prev) => [
 				...prev,
-				<>
-					{DRAGON_EMOJI}{' '}
-					{hasDragonCrited ? `critou${EXPLOSION_EMOJI}` : 'curou'}{' '}
-					<span className='text-green-400'>{totalHeal}</span> de vida
-					{GREEN_HEART_EMOJI}
-				</>
+				`${dragon.emoji} ${
+					hasDragonCrited ? `critou${EXPLOSION_EMOJI}` : 'curou'
+				} ${totalHeal} de vida${GREEN_HEART_EMOJI}`
 			])
 		} else if (type === 'FIREBALL') {
 			const fireballDamage = Math.trunc(
@@ -262,17 +248,14 @@ export function useGame({
 
 			setLogs((prev) => [
 				...prev,
-				<>
-					{DRAGON_EMOJI}{' '}
-					{hasDragonCrited ? `critou${EXPLOSION_EMOJI}` : 'causou'}{' '}
-					<span className='text-orange-400'>{totalFireballDamage}</span> de bola
-					de fogo{FIRE_EMOJI}
-				</>
+				`${dragon.emoji} ${
+					hasDragonCrited ? `critou${EXPLOSION_EMOJI}` : 'causou'
+				} ${totalFireballDamage} de bola de fogo${FIRE_EMOJI}`
 			])
 		} else if (type === 'FUCK_YOU') {
 			setLogs((prev) => [
 				...prev,
-				`${MIDDLE_FINGER_EMOJI}${MIDDLE_FINGER_EMOJI}${MIDDLE_FINGER_EMOJI} ${DRAGON_EMOJI} decidiu que você deveria ${SKULL_EMOJI} ${MIDDLE_FINGER_EMOJI}${MIDDLE_FINGER_EMOJI}${MIDDLE_FINGER_EMOJI}`
+				`${MIDDLE_FINGER_EMOJI}${MIDDLE_FINGER_EMOJI}${MIDDLE_FINGER_EMOJI} ${dragon.emoji} decidiu que você deveria ${SKULL_EMOJI} ${MIDDLE_FINGER_EMOJI}${MIDDLE_FINGER_EMOJI}${MIDDLE_FINGER_EMOJI}`
 			])
 		}
 	}
@@ -280,22 +263,27 @@ export function useGame({
 	function checkEndGame() {
 		if (player.health === 0) {
 			setIsGameEnd(true)
+			addScore({
+				player,
+				dragon,
+				createdAt: Date.now(),
+				time: Date.now() - startTime,
+				logs
+			})
 			setLogs((prev) => [
 				...prev,
-				`${SKULL_EMOJI}${SKULL_EMOJI}${SKULL_EMOJI}${getCharacterEmoji({
-					playerGender,
-					skinColor
-				})}${SKULL_EMOJI}${SKULL_EMOJI}${SKULL_EMOJI}`
+				`${SKULL_EMOJI}${SKULL_EMOJI}${SKULL_EMOJI}${player.emoji}${SKULL_EMOJI}${SKULL_EMOJI}${SKULL_EMOJI}`
 			])
 		} else if (dragon.health === 0) {
 			setIsGameEnd(true)
-			setLogs((prev) => [
-				...prev,
-				`${getCharacterEmoji({
-					playerGender,
-					skinColor
-				})} venceu!`
-			])
+			addScore({
+				player,
+				dragon,
+				createdAt: Date.now(),
+				time: Date.now() - startTime,
+				logs
+			})
+			setLogs((prev) => [...prev, `${player.emoji} venceu!`])
 		}
 	}
 

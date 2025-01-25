@@ -12,4 +12,5 @@ export type Character = {
 	fireballCount: number
 	critChance: number
 	critFactor: number
+	emoji: string
 }

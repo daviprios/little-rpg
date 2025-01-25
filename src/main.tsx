@@ -3,11 +3,14 @@ import './index.css'
 import App from './App.tsx'
 import { SettingsProvider } from './context/SettingsContext.tsx'
 import { NavigationProvider } from './context/NavigationContext.tsx'
+import { LeaderboardProvider } from './context/LeaderboardContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
 	<NavigationProvider>
 		<SettingsProvider>
-			<App />
+			<LeaderboardProvider>
+				<App />
+			</LeaderboardProvider>
 		</SettingsProvider>
 	</NavigationProvider>
 )

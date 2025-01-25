@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext } from 'react'
+import { useLocalStorageState } from '../hooks/useLocalStorageState'
 
 export type SkinColor = '1' | '2' | '3' | '4' | '5'
 export type PlayerGender = 'MAN' | 'WOMAN' | 'OTHER_OR_NONE'
@@ -28,11 +29,19 @@ const settingsContext = createContext<{
 export const useSettingsContext = () => useContext(settingsContext)
 
 export function SettingsProvider({ children }: { children: React.ReactNode }) {
-	const [username, setUsername] = useState('')
-	const [skinColor, setSkinColor] = useState<SkinColor>('3')
-	const [playerGender, setPlayerGender] =
-		useState<PlayerGender>('OTHER_OR_NONE')
-	const [voiceTone, setVoiceTone] = useState<VoiceTone>('LOW')
+	const [username, setUsername] = useLocalStorageState('playerusername', '')
+	const [skinColor, setSkinColor] = useLocalStorageState<SkinColor>(
+		'skintone',
+		'3'
+	)
+	const [playerGender, setPlayerGender] = useLocalStorageState<PlayerGender>(
+		'playergender',
+		'OTHER_OR_NONE'
+	)
+	const [voiceTone, setVoiceTone] = useLocalStorageState<VoiceTone>(
+		'voicetone',
+		'LOW'
+	)
 
 	return (
 		<settingsContext.Provider
