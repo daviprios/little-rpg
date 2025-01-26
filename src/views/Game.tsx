@@ -29,6 +29,14 @@ export default function Game() {
 
 	return (
 		<div className='flex flex-col gap-2'>
+			<div className='flex'>
+				<button
+					className='border-2 rounded-md border-slate-600 py-2 px-4 cursor-pointer hover:bg-slate-600 w-full'
+					onClick={() => setNavigationView('MENU')}
+				>
+					Voltar ao menu principal
+				</button>
+			</div>
 			<div className='border-2 border-slate-600 rounded-md w-[30rem] h-96 p-2 flex flex-col justify-between gap-2'>
 				<div>
 					<HealthBar {...player} />
@@ -80,16 +88,6 @@ export default function Game() {
 					<HealthBar {...dragon} />
 				</div>
 			</div>
-			{isGameEnd && (
-				<div className='flex'>
-					<button
-						className='border-2 rounded-md border-slate-600 py-2 px-4 cursor-pointer hover:bg-slate-600 w-full'
-						onClick={() => setNavigationView('MENU')}
-					>
-						Voltar ao menu principal
-					</button>
-				</div>
-			)}
 		</div>
 	)
 }
