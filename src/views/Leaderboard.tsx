@@ -1,6 +1,9 @@
+import { useTranslation } from 'react-i18next'
 import { useLeaderboardContext } from '../context/LeaderboardContext'
 
 export default function Leaderboard() {
+	const { t } = useTranslation()
+
 	const { leaderboard } = useLeaderboardContext()
 
 	return (
@@ -9,9 +12,15 @@ export default function Leaderboard() {
 				<table>
 					<thead>
 						<tr>
-							<th className='text-left min-w-16'>Emoji</th>
-							<th className='text-left min-w-60'>Nome</th>
-							<th className='text-left min-w-16'>Vida</th>
+							<th className='text-left min-w-16'>
+								{t('leaderboard.table.columns.emoji')}
+							</th>
+							<th className='text-left min-w-60'>
+								{t('leaderboard.table.columns.name')}
+							</th>
+							<th className='text-left min-w-16'>
+								{t('leaderboard.table.columns.health')}
+							</th>
 						</tr>
 					</thead>
 					<tbody>

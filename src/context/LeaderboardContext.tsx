@@ -1,11 +1,12 @@
 import { createContext, useContext } from 'react'
 import { Character } from '../types/Character'
 import { useLocalStorageState } from '../hooks/useLocalStorageState'
+import { Log } from '@/types/Log'
 
 type Leaderboard = {
 	player: Character
 	dragon: Character
-	logs: string[]
+	logs: Log[]
 	time: number
 	createdAt: number
 }

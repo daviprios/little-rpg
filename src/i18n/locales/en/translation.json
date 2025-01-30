@@ -1,0 +1,70 @@
+{
+	"mainMenu": {
+		"title": "Little RPG",
+		"menus": {
+			"startGame": {
+				"title": "Start Game",
+				"skinTone": {
+					"label": "Skin Tone",
+					"light": "Light",
+					"dark": "Dark"
+				},
+				"gender": {
+					"label": "Gender",
+					"man": "Man",
+					"woman": "Woman",
+					"other": "None/Other"
+				},
+				"name": {
+					"label": "Name",
+					"placeholder": "Enter your name",
+					"defaultName": "Nameless Idiot"
+				},
+				"confirmButton": "Confirm"
+			},
+			"leaderboard": {
+				"title": "Leaderboard",
+				"table": {
+					"columns": {
+						"emoji": "Emoji",
+						"name": "Name",
+						"health": "Health"
+					}
+				},
+				"completeTableButton": "View Full Leaderboard"
+			}
+		}
+	},
+	"game": {
+		"logs": {
+			"attack": "{{attackerEmoji}} dealt <color>{{totalDamage}}</color> damage{{damageEmoji}}",
+			"attackCrited": "{{attackerEmoji}} critted💥 <color>{{totalDamage}}</color> damage{{damageEmoji}}",
+			"heal": "{{healerEmoji}} healed <color>{{totalHeal}}</color> health💚",
+			"healCrited": "{{healerEmoji}} critted💥 <color>{{totalHeal}}</color> health💚",
+			"fireball": "{{fireballerEmoji}} dealt <color>{{totalFireballDamage}}</color> fireball damage🔥",
+			"fireballCrited": "{{fireballerEmoji}} critted💥 <color>{{totalFireballDamage}}</color> fireball damage🔥",
+			"coward": "❌ Cowards Not Allowed ❌",
+			"fuckYou": "🖕🖕🖕 {{actorEmoji}} decided you should 💀 🖕🖕🖕",
+			"youDied": "💀💀💀{{playerEmoji}}💀💀💀",
+			"youWon": "{{playerEmoji}} won!"
+		},
+		"backButton": "Back to Main Menu",
+		"actions": {
+			"attack": "Attack ⚔️",
+			"fireball": "Fireball ({{fireballCount}}) 🔥",
+			"heal": "Heal ({{healCount}}) 🩹",
+			"surrender": "Surrender 🏳️"
+		},
+		"dragon": "Dragon"
+	},
+	"leaderboard": {
+		"title": "Leaderboard",
+		"table": {
+			"columns": {
+				"emoji": "Emoji",
+				"name": "Name",
+				"health": "Health"
+			}
+		}
+	}
+}

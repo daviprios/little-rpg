@@ -1,0 +1,70 @@
+{
+	"mainMenu": {
+		"title": "Little RPG",
+		"menus": {
+			"startGame": {
+				"title": "Iniciar jogo",
+				"skinTone": {
+					"label": "Tom de pele",
+					"light": "Claro",
+					"dark": "Escuro"
+				},
+				"gender": {
+					"label": "Gênero",
+					"man": "Homem",
+					"woman": "Mulher",
+					"other": "Nenhum/Outro"
+				},
+				"name": {
+					"label": "Nome",
+					"placeholder": "Digite seu nome",
+					"defaultName": "Idiota sem nome"
+				},
+				"confirmButton": "Confirmar"
+			},
+			"leaderboard": {
+				"title": "Tabela de recordes",
+				"table": {
+					"columns": {
+						"emoji": "Emoji",
+						"name": "Nome",
+						"health": "Vida"
+					}
+				},
+				"completeTableButton": "Ver tabela completa"
+			}
+		}
+	},
+	"game": {
+		"logs": {
+			"attack": "{{attackerEmoji}} causou <color>{{totalDamage}}</color> de dano{{damageEmoji}}",
+			"attackCrited": "{{attackerEmoji}} critou💥 <color>{{totalDamage}}</color> de dano{{damageEmoji}}",
+			"heal": "{{healerEmoji}} curou <color>{{totalHeal}}</color> de vida💚",
+			"healCrited": "{{healerEmoji}} critou💥 <color>{{totalHeal}}</color> de vida💚",
+			"fireball": "{{fireballerEmoji}} causou <color>{{totalFireballDamage}}</color> de bola de fogo🔥",
+			"fireballCrited": "{{fireballerEmoji}} critou💥 <color>{{totalFireballDamage}}</color> de bola de fogo🔥",
+			"coward": "❌ Proibido covardes ❌",
+			"fuckYou": "🖕🖕🖕 {{actorEmoji}} decidiu que você deveria 💀 🖕🖕🖕",
+			"youDied": "💀💀💀{{playerEmoji}}💀💀💀",
+			"youWon": "{{playerEmoji}} venceu!"
+		},
+		"backButton": "Voltar ao menu principal",
+		"actions": {
+			"attack": "Atacar ⚔️",
+			"fireball": "Bola de fogo ({{fireballCount}}) 🔥",
+			"heal": "Curar ({{healCount}}) 🩹",
+			"surrender": "Render-se 🏳️"
+		},
+		"dragon": "Dragão"
+	},
+	"leaderboard": {
+		"title": "Tabela de recordes",
+		"table": {
+			"columns": {
+				"emoji": "Emoji",
+				"name": "Nome",
+				"health": "Vida"
+			}
+		}
+	}
+}
